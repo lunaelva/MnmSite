@@ -1,0 +1,33 @@
+package com.mnm.site;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.mnm.site.entity.Member;
+import com.mnm.site.repository.MemberRepository;
+ 
+@Controller
+@RequestMapping("/")
+public class MainController {
+	@Autowired 
+	private MemberRepository memberRepository;
+	
+    @RequestMapping
+    public @ResponseBody String index() {
+        return "Hello WOLRD!";
+    }
+    
+    @RequestMapping("/users")
+    public @ResponseBody List<Member> getUserList() {
+        return memberRepository.findAll();
+    }
+    
+    @RequestMapping("/velocity")
+    public String velocity() {
+        return "intro";
+    }
+}
