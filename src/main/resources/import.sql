@@ -1,1 +1,0 @@
-INSERT INTO `member` (`m_user_id`, `m_user_name`, `m_nickname`, `m_password`, `m_status`, `m_birthday`, `m_gender`, `m_occtime`) VALUES ('ma-an', '만', '만', 'qwe123', 3, '2015-10-13', 2, '2015-10-23 00:00:00');

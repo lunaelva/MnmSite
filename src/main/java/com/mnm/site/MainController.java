@@ -17,8 +17,8 @@ public class MainController {
 	private MemberRepository memberRepository;
 	
     @RequestMapping
-    public @ResponseBody String index() {
-        return "Hello WOLRD!";
+    public String index() {
+        return "intro";
     }
     
     @RequestMapping("/users")
