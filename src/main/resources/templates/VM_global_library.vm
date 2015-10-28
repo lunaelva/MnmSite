@@ -8,19 +8,8 @@
 	<link rel="stylesheet" href="/mnm/bootstrap/css/bootstrap-theme.min.css">
 	<script src="/mnm/js/jquery-1.11.3.js"></script>
 	<script src="/mnm/bootstrap/js/bootstrap.min.js"></script>
-	<script language="text/javascript">
-		$(function(){
-		setDate();
-		});
-		function setDate(){
-			var date = new Date();
-			console.log(date.getFullYear());
-		}
-	</script>
 </head>
 <body>
-
-
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -37,4 +26,18 @@
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
+#end
+
+
+#macro(web_common_footer)
+
+      <!-- footer-->
+      <hr>
+
+      <footer>
+        <p>&copy; M&M 2015</p>
+      </footer>
+    </div> <!-- /container -->
+</body>
+</html>
 #end

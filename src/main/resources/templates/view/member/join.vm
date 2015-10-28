@@ -1,14 +1,47 @@
 #web_common_top()
-    
-    <!-- 여기까지 상단 -->
- 
+
+<script type='text/javascript'>
+	$(function($){
+		var date = new Date();
+		for(var i=1900;i<=date.getFullYear();i++){
+			$("#birthYear").append("<option value='"+i+"'>"+i+"</option>");
+		}
+		
+		for(var i=1;i<=12;i++){
+			$("#birthMonth").append("<option value='"+i+"'>"+i+"</option>");
+		}
+		
+		$("#birthMonth").on("change",function(){
+			var lastDays = [31,29,31,30,31,30,31,31,30,31,30,31];
+			$("#birthDay option").remove();
+			$("#birthDay").append("<option value=''>일</option>");
+			for(var i=1;i<=lastDays[parseInt($(this).val()-1)];i++){
+				$("#birthDay").append("<option value='"+i+"'>"+i+"</option>");
+			}
+		});
+		
+		$("#btnJoin").click(function(){
+			var param = $("#memberForm").serialize();
+					
+			jQuery.post( "/mnm/member/join"
+				,param
+				,function( data ) {
+				alert("success");
+			}).error(function(){
+				alert("Error!");
+			});
+		});
+	});	
+	
+</script>
+ <form name="memberForm" id="memberForm">
  <div class="container theme-showcase" role="main" style="margin-top: 80px;">	
  	<div class="form-horizontal" role="form">
 
     <div class="form-group">
         <label for="txtId" class="col-sm-2 control-label">ID</label>
         <div class="col-sm-5">
-            <input type="text" class="form-control" id="userId" placeholder="회원아이디">
+            <input type="text" class="form-control" id="userId" name="userId" placeholder="회원아이디">
         </div>        
   		<button type="button" class="btn btn-info btn-sm ">중복체크</button>
     </div>
@@ -16,7 +49,7 @@
     <div class="form-group">
         <label for="txtPwd" class="col-sm-2 control-label">비밀번호</label>
         <div class="col-sm-5">
-            <input type="password" class="form-control" id="userPwd" placeholder="비밀번호">
+            <input type="password" class="form-control" id="pwd" name="pwd" placeholder="비밀번호">
         </div>
     </div>
     
@@ -29,14 +62,14 @@
     <div class="form-group">
         <label for="txtNick" class="col-sm-2 control-label">닉네임</label>
         <div class="col-sm-5">
-            <input type="text" class="form-control" id="userNick" placeholder="닉네임">
+            <input type="text" class="form-control" id="nickName" name="nickName" placeholder="닉네임">
         </div>        
   		<button type="button" class="btn btn-info btn-sm ">중복체크</button>
     </div>
     <div class="form-group">
-        <label for="txtAddress" class="col-sm-2 control-label">이름</label>
+        <label for="userName" class="col-sm-2 control-label">이름</label>
         <div class="col-sm-5">
-            <input type="text" class="form-control" id="userName" placeholder="이름">
+            <input type="text" class="form-control" id="userName" name="userName" placeholder="이름">
         </div>
     </div>
 
@@ -45,37 +78,33 @@
         <div class="col-sm-10">
 
             <label class="radio-inline">
-                <input type="radio" name="optGender" id="optGenderMan" value="M">
+                <input type="radio" id="optGenderMan" name="gender" value="M">
                 남자
             </label>
             <label class="radio-inline">
-                <input type="radio" name="optGender" id="optGenderWomen" value="F">
+                <input type="radio" id="optGenderWomen"  name="gender" value="F">
                 여자
             </label>
 
         </div>
     </div>
 
-
-
     <div class="form-group">
         <label for="txtBirth" class="col-sm-2 control-label">생년월일: </label>
-        <div class="col-sm-10">
+        <div class="col-sm-8">
             <div class="row">
                 <div class="col-sm-3">
-                    <select name="ctl00$MainContent$DropDownList1" id="MainContent_DropDownList1" class="form-control" style="width:100px;">
+                    <select name="birthYear" id="birthYear" name="birthYear" class="form-control" style="width:100px;">
                         <option value="년">년</option>
-
                     </select>
                 </div>
                 <div class="col-sm-3">
-                    <select name="ctl00$MainContent$DropDownList2" id="MainContent_DropDownList2" class="form-control" style="width:100px;">
+                    <select name="birthMonth" id="birthMonth" name="birthMonth" class="form-control" style="width:100px;">
                         <option value="월">월</option>
-
                     </select>
                 </div>
                 <div class="col-sm-3">
-                    <select name="ctl00$MainContent$DropDownList3" id="MainContent_DropDownList3" class="form-control" style="width:100px;">
+                    <select id="birthDay" name="birthDay" class="form-control" style="width:100px;">
                         <option value="일">일</option>
 
                     </select>
@@ -85,29 +114,22 @@
     </div>
 
 
-
     <div class="form-group">
-        <label for="lstCountry" class="col-sm-2 control-label">국가: </label>
-        <div class="col-sm-10">
-            <select name="ctl00$MainContent$lstCountry" id="lstCountry" class="form-control">
-                <option value="대한민국">대한민국</option>
-                <option value="기타">기타</option>
-
-            </select>
+        <label for="email" class="col-sm-2 control-label">이메일</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" id="email" name="email" placeholder="이메일">
         </div>
     </div>
+     <div class="form-group">
+        <label class="col-sm-2 control-label"></label>
+        <div class="col-sm-7">
+             <button id="btnJoin" type="button" class="btn btn-primary btn-lg btn-block">가입하기</button>
+        </div>
+    </div>
+   
+
 </div>
-	</div>
-
+</form>
     
-    
+#web_common_footer()    
       
-      <!-- footer-->
-      <hr>
-
-      <footer>
-        <p>&copy; M&M 2015</p>
-      </footer>
-    </div> <!-- /container -->
-</body>
-</html>

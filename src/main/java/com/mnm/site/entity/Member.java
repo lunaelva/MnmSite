@@ -2,7 +2,7 @@ package com.mnm.site.entity;
  
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Table(name="member")
@@ -12,7 +12,7 @@ public class Member implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "m_id", nullable = false)
     private int id;
-
+    
     @Column(name = "m_user_id", nullable = false)
     private String userId;
  
@@ -35,7 +35,18 @@ public class Member implements Serializable {
     private int gender;    
     
     @Column(name = "m_occtime", nullable = false)
-    private Date occTime;
+    private Date occTime;    
+
+    @Column(name = "m_email", nullable = false)
+    private String email;
+    
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public int getId() {
 		return id;
