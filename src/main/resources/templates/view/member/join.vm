@@ -1,4 +1,4 @@
-#web_common_top()
+#web_common_top(date)
 
 <script type='text/javascript'>
 	$(function($){
@@ -31,7 +31,25 @@
 				alert("Error!");
 			});
 		});
+		
+		
+		$("#idCheck").click(function(){
+			jQuery.post( "/mnm/member/join/idCheck"
+				,{id:$("#userId").val()}
+				,function( data ) {
+				consoel.log(data);
+			}).error(function(){
+				alert("Error!");
+			});
+		});
 	});	
+	
+	
+	function validation(){
+		if($("#userId").val() == ""){
+			alert("회원ID를 입력해 주세요.");
+		}
+	}
 	
 </script>
  <form name="memberForm" id="memberForm">
@@ -43,7 +61,7 @@
         <div class="col-sm-5">
             <input type="text" class="form-control" id="userId" name="userId" placeholder="회원아이디">
         </div>        
-  		<button type="button" class="btn btn-info btn-sm ">중복체크</button>
+  		<button type="button" class="btn btn-info btn-sm " id="idCheck">중복체크</button>
     </div>
 
     <div class="form-group">

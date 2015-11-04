@@ -1,10 +1,12 @@
 package com.mnm.site.service;
 
-import org.springframework.stereotype.Service;
+import java.util.Map;
 
-import com.mnm.site.entity.Member;
+import org.springframework.stereotype.Service;
 
 @Service
 public interface MemberService {
-	public boolean createMember(Member member);
+	public boolean createMember(Map<String, String> param);
+
+	public boolean isExistMember(String id);
 }
