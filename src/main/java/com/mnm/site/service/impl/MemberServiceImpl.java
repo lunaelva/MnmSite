@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
-import javax.transaction.Transactional;
+//import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,11 +18,11 @@ import com.mnm.site.service.MemberService;
 import com.mnm.site.util.MemberUtil;
 
 @Service("memberService")
-@Transactional
+//@Transactional
 public class MemberServiceImpl implements MemberService{	
 
-	@Autowired 
-	private MemberRepository memberRepository;
+//	@Autowired 
+//	private MemberRepository memberRepository;
 	
 	@Override
 	public boolean createMember(Map<String, String> param){
@@ -41,7 +41,7 @@ public class MemberServiceImpl implements MemberService{
 			e.printStackTrace();
 		}
 		
-		Member member = new Member();
+		/*Member member = new Member();
 		
 		member.setBirth(date);
 		member.setEmail(param.get("email"));
@@ -58,7 +58,7 @@ public class MemberServiceImpl implements MemberService{
 			result = true;
 		}catch(Exception e){
 			e.printStackTrace();
-		}
+		}*/
 		return result;
 	}
 	

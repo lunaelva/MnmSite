@@ -1,6 +1,8 @@
-#web_common_top(date)
+#web_common_top()
 
 <script type='text/javascript'>
+	var _idCheck = false;
+	var _nickCheck = false;
 	$(function($){
 		var date = new Date();
 		for(var i=1900;i<=date.getFullYear();i++){
@@ -34,20 +36,102 @@
 		
 		
 		$("#idCheck").click(function(){
-			jQuery.post( "/mnm/member/join/idCheck"
+			removeStatus("#idGroup");
+			
+			if($("#userId").val() == ""){
+				initInputStatus("#idGroup", "err");
+				$("#idGroup").append("<label class=\"control-label errMsg\" for=\"inputError2\">회원ID를 입력해주세요.</label>");
+				return;
+			}
+			jQuery.post( "/mnm/member/idCheck"
 				,{id:$("#userId").val()}
 				,function( data ) {
-				consoel.log(data);
+				
+				if(data == true){
+					initInputStatus("#idGroup", "ok");
+					_idCheck = true;
+				}else{
+					initInputStatus("#idGroup", "err");
+					$("#idGroup").append("<label class=\"control-label errMsg\" for=\"inputError2\">이미 사용중인 ID입니다.</label>");
+				}
 			}).error(function(){
 				alert("Error!");
 			});
 		});
+		
+		$("#nickCheck").click(function(){
+			removeStatus("#nickGroup");
+			
+			if($("#nickName").val() == ""){
+				initInputStatus("#nickGroup", "err");
+				$("#nickGroup").append("<label class=\"control-label errMsg\" for=\"inputError2\">닉네임을 입력해주세요.</label>");
+				return;
+			}
+			jQuery.post( "/mnm/member/nickCheck"
+				,{nickName:$("#nickName").val()}
+				,function( data ) {
+				
+				if(data == true){
+					initInputStatus("#nickGroup", "ok");
+					_idCheck = true;
+				}else{
+					initInputStatus("#nickGroup", "err");
+					$("#nickGroup").append("<label class=\"control-label errMsg\" for=\"inputError2\">이미 사용중인 닉네임입니다.</label>");
+				}
+			}).error(function(){
+				alert("Error!");
+			});
+		});
+		
+		$("#userPwdCheck").on('input',function(){
+			removeStatus("#chkPwGroup");
+			if($(this).val() != $("#pwd").val()){
+				initInputStatus("#chkPwGroup", "err");
+				$("#chkPwGroup").append("<label class=\"control-label errMsg\" for=\"inputError2\">비밀번호가 일치 하지 않습니다.</label>");
+			}else{
+				initInputStatus("#chkPwGroup", "ok");
+			}
+		});
 	});	
 	
+	
+	function removeStatus(target){
+		$(target+" div span").remove();
+		$(target).removeClass("has-success");
+		$(target).removeClass("has-error");
+		$(target + " div input").removeAttr("aria-describedby");
+		$(target + " .errMsg").remove();
+	}
+	
+	function initInputStatus(target, type){
+		var hasCls = "has-success";
+		var icon ="glyphicon-ok";
+		var clsStatus = "inputSuccess2Status";
+		if(type == "err"){
+			hasCls = "has-error";
+			icon = "glyphicon-remove";
+			clsStatus = "inputError2Status";
+		}
+		
+		$(target).addClass(hasCls);
+		$(target + " div").append("<span class=\"glyphicon "+icon+" form-control-feedback\" aria-hidden=\"true\"></span>");
+		$(target + " div input").attr("aria-describedby=\""+clsStatus+"\"");
+		$(target + " div").append("<span id=\""+clsStatus+"\" class=\"sr-only\"></span>");
+	}
+	
+	function checkPassword(){
+	
+	}
 	
 	function validation(){
 		if($("#userId").val() == ""){
 			alert("회원ID를 입력해 주세요.");
+			return;
+		}
+		
+		if($("#userPwdCheck").val() != $("#pwd").val()){			
+			alert("비밀번호 확인이 일치하지 않습니다.");
+			return;
 		}
 	}
 	
@@ -56,7 +140,7 @@
  <div class="container theme-showcase" role="main" style="margin-top: 80px;">	
  	<div class="form-horizontal" role="form">
 
-    <div class="form-group">
+    <div id="idGroup" class="form-group has-feedback">
         <label for="txtId" class="col-sm-2 control-label">ID</label>
         <div class="col-sm-5">
             <input type="text" class="form-control" id="userId" name="userId" placeholder="회원아이디">
@@ -71,18 +155,18 @@
         </div>
     </div>
     
-    <div class="form-group">
+    <div id="chkPwGroup" class="form-group has-feedback">
         <label for="txtPwdChk" class="col-sm-2 control-label">비밀번호확인</label>
         <div class="col-sm-5">
             <input type="password" class="form-control" id="userPwdCheck" placeholder="비밀번호확인">
         </div>
     </div>
-    <div class="form-group">
+    <div id="nickGroup" class="form-group has-feedback">
         <label for="txtNick" class="col-sm-2 control-label">닉네임</label>
         <div class="col-sm-5">
             <input type="text" class="form-control" id="nickName" name="nickName" placeholder="닉네임">
         </div>        
-  		<button type="button" class="btn btn-info btn-sm ">중복체크</button>
+  		<button type="button" class="btn btn-info btn-sm"  id="nickCheck">중복체크</button>
     </div>
     <div class="form-group">
         <label for="userName" class="col-sm-2 control-label">이름</label>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mnm.site.service.MemberService;
@@ -16,8 +17,8 @@ import com.mnm.site.service.MemberService;
 @Controller
 @RequestMapping("/member")
 public class MemberController {
-	@Autowired 
-	private MemberService memberService;
+	//@Autowired 
+	//private MemberService memberService;
 	
 	@RequestMapping("/join/view")
     public String joinView() {
@@ -28,23 +29,45 @@ public class MemberController {
 	public ModelAndView join(HttpServletRequest request, @RequestParam Map<String, String> param){
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("json");	
-		if(memberService.createMember(param)){
-			mav.addObject("result", "success");
-		}else{
-			mav.addObject("result", "fail");
-		}
+		//if(memberService.createMember(param)){
+//			mav.addObject("result", "success");
+//		}else{
+//			mav.addObject("result", "fail");
+//		}
 		return mav;
 	}
 	
 	
-	@RequestMapping(value="/join/idCheck", method=RequestMethod.POST)
-	public ModelAndView joinIdCheck(HttpServletRequest request, @RequestParam("id") String id){
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("json");	
+	@ResponseBody
+	@RequestMapping(value="/idCheck", method=RequestMethod.POST)
+	public Boolean joinIdCheck(HttpServletRequest request, @RequestParam("id") String id){
+		ModelAndView mav = new ModelAndView();	
 		
-		if(memberService.isExistMember(id)){
-			System.out.println("true");
+		String memberId = "admin";
+		
+		if(id.equals(memberId)){
+			return false;
 		}
-		return mav;
+//		
+//		if(memberService.isExistMember(id)){
+//			System.out.println("true");
+//		}
+		return true;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/nickCheck", method=RequestMethod.POST)
+	public Boolean joinNickCheck(HttpServletRequest request, @RequestParam("nickName") String nickName){
+		System.out.println("nickName : " + nickName);
+		String memberNick = "관리자";
+		
+		if(nickName.equals(memberNick)){
+			return false;
+		}
+//		
+//		if(memberService.isExistMember(id)){
+//			System.out.println("true");
+//		}
+		return true;
 	}
 }

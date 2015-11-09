@@ -4,11 +4,11 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-@Entity
-@Table(name="member")
+//@Entity
+//@Table(name="member")
 public class Member implements Serializable {
  
-    @Id
+/*    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "m_id", nullable = false)
     private int id;
@@ -120,6 +120,6 @@ public class Member implements Serializable {
 		this.occTime = occTime;
 	}    
     
-    
+*/    
 }
 
