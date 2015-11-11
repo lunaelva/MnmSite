@@ -13,18 +13,18 @@ import com.mnm.site.repository.MemberRepository;
 @Controller
 @RequestMapping("/")
 public class MainController {
-//	@Autowired 
-//	private MemberRepository memberRepository;
+	@Autowired 
+	private MemberRepository memberRepository;
 	
     @RequestMapping
     public String index() {
         return "intro";
     }
     
-//    @RequestMapping("/users")
-//    public @ResponseBody List<Member> getUserList() {
-//        return memberRepository.findAll();
-//    }
+    @RequestMapping("/users")
+    public @ResponseBody List<Member> getUserList() {
+        return memberRepository.findAll();
+    }
     
     @RequestMapping("/velocity")
     public String velocity() {

@@ -17,8 +17,8 @@ import com.mnm.site.service.MemberService;
 @Controller
 @RequestMapping("/member")
 public class MemberController {
-	//@Autowired 
-	//private MemberService memberService;
+	@Autowired 
+	private MemberService memberService;
 	
 	@RequestMapping("/join/view")
     public String joinView() {
@@ -29,11 +29,11 @@ public class MemberController {
 	public ModelAndView join(HttpServletRequest request, @RequestParam Map<String, String> param){
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("json");	
-		//if(memberService.createMember(param)){
-//			mav.addObject("result", "success");
-//		}else{
-//			mav.addObject("result", "fail");
-//		}
+		if(memberService.createMember(param)){
+			mav.addObject("result", "success");
+		}else{
+			mav.addObject("result", "fail");
+		}
 		return mav;
 	}
 	
@@ -41,17 +41,10 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value="/idCheck", method=RequestMethod.POST)
 	public Boolean joinIdCheck(HttpServletRequest request, @RequestParam("id") String id){
-		ModelAndView mav = new ModelAndView();	
 		
-		String memberId = "admin";
-		
-		if(id.equals(memberId)){
-			return false;
+		if(memberService.isExistMember(id)){
+			System.out.println("true");
 		}
-//		
-//		if(memberService.isExistMember(id)){
-//			System.out.println("true");
-//		}
 		return true;
 	}
 	
@@ -64,7 +57,7 @@ public class MemberController {
 		if(nickName.equals(memberNick)){
 			return false;
 		}
-//		
+		
 //		if(memberService.isExistMember(id)){
 //			System.out.println("true");
 //		}
