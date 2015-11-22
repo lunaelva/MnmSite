@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mnm.site.service.MemberService;
-
+ 
 @Controller
 @RequestMapping("/member")
 public class MemberController {
