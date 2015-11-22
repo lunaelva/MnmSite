@@ -59,7 +59,7 @@ public class MemberController {
 		}
 		
 //		if(memberService.isExistMember(id)){
-//			System.out.println("true");
+//			System.out.println("true");//
 //		}
 		return true;
 	}
