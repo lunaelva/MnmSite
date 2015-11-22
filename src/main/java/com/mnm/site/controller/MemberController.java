@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mnm.site.service.MemberService;
-
+ 
 @Controller
 @RequestMapping("/member")
 public class MemberController {
@@ -22,7 +22,7 @@ public class MemberController {
 	
 	@RequestMapping("/join/view")
     public String joinView() {
-        return "/view/member/join";
+        return "/view/member/join"; 
     }
 	
 	@RequestMapping(value="/join", method=RequestMethod.POST)
@@ -40,9 +40,9 @@ public class MemberController {
 	
 	@ResponseBody
 	@RequestMapping(value="/idCheck", method=RequestMethod.POST)
-	public Boolean joinIdCheck(HttpServletRequest request, @RequestParam("id") String id){
+	public Boolean joinIdCheck(HttpServletRequest request, @RequestParam("id") String userId){
 		
-		if(memberService.isExistMember(id)){
+		if(memberService.isExistMember(userId)){
 			System.out.println("true");
 		}
 		return true;
