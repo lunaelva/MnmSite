@@ -61,6 +61,9 @@ public class MemberController {
 		if(memberService.isExistMember(memberNick)){
 			System.out.println("true");
 		}
+//		if(memberService.isExistMember(id)){
+//			System.out.println("true");//
+//		}
 		return true;
 	}
 }
