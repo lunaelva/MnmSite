@@ -58,9 +58,9 @@ public class MemberController {
 			return false;
 		}
 		
-//		if(memberService.isExistMember(id)){
-//			System.out.println("true");
-//		}
+		if(memberService.isExistMember(memberNick)){
+			System.out.println("true");
+		}
 		return true;
 	}
 }
