@@ -5,39 +5,40 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name="member")
-public class Member implements Serializable {
- 
-    @Id
+@Table(name="member_info")
+public class MemberInfo implements Serializable {
+	private static final long serialVersionUID = -8046001056172441612L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "m_id", nullable = false)
+    @Column(name = "m_id")
     private int id;
     
-    @Column(name = "m_user_id", nullable = false)
+    @Column(name = "m_user_id")
     private String userId;
  
-    @Column(name = "m_user_name", nullable = false)
+    @Column(name = "m_user_name")
     private String userName;
 
-    @Column(name = "m_nickname", nullable = false)
+    @Column(name = "m_nickname")
     private String nickName;
     
-    @Column(name = "m_password", nullable = false)
+    @Column(name = "m_password")
     private String pwd;
 
-    @Column(name = "m_status", nullable = false)
+    @Column(name = "m_status")
     private int status;    
 
-    @Column(name = "m_birthday", nullable = false)
+    @Column(name = "m_birthday")
     private Date birth;
 
-    @Column(name = "m_gender", nullable = false)
+    @Column(name = "m_gender")
     private int gender;    
     
-    @Column(name = "m_occtime", nullable = false)
+    @Column(name = "m_occtime")
     private Date occTime;    
 
-    @Column(name = "m_email", nullable = false)
+    @Column(name = "m_email")
     private String email;
     
 	public String getEmail() {

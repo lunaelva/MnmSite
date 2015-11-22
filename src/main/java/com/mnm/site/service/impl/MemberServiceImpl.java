@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.transaction.Transactional;
@@ -11,8 +12,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mnm.site.entity.Member;
-import com.mnm.site.form.MemberForm;
+import com.mnm.site.entity.MemberInfo;
 import com.mnm.site.repository.MemberRepository;
 import com.mnm.site.service.MemberService;
 import com.mnm.site.util.MemberUtil;
@@ -41,7 +41,7 @@ public class MemberServiceImpl implements MemberService{
 			e.printStackTrace();
 		}
 		
-		Member member = new Member();
+		MemberInfo member = new MemberInfo();
 		
 		member.setBirth(date);
 		member.setEmail(param.get("email"));
@@ -64,13 +64,23 @@ public class MemberServiceImpl implements MemberService{
 	
 
 	@Override
-	public boolean isExistMember(String id){
+	public boolean isExistMember(String userId){
 		boolean result = true;
-		Member member = memberRepository.findByUserId(id);
+//		List<MemberInfo> member = memberRepository.findByUserId(userId);
+//		
+//		System.out.println(member.size());
 		
-		if(member != null){
-			result = false;
-		}
+		
+		
+		//Member member = memberRepository.findByUserId(id);
+	//	
+	//	if(member != null){
+	//		result = false;
+	//	}
+		
+//		if(id.equals("admin")){
+//			result = false;
+//		}
 		
 		return result;
 	

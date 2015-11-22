@@ -1,17 +1,10 @@
 package com.mnm.site.repository;
-/***
- *  repository는 구현체가 없다..
- *  메서드로 호출
- * @author lunamaan
- * 
- */
+
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
-import com.mnm.site.entity.Member;
+import com.mnm.site.entity.MemberInfo;
 
-public interface MemberRepository extends JpaRepository<Member, Long>{
-	 @Query("select member from Member member where member.userId = ?1")
-	public Member findByUserId(String userId);
+public interface MemberRepository  extends JpaRepository<MemberInfo, Long> {
 }
-

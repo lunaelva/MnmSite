@@ -7,7 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mnm.site.entity.Member;
+import com.mnm.site.entity.MemberInfo;
+import com.mnm.site.repository.BaseRepository;
 import com.mnm.site.repository.MemberRepository;
  
 @Controller
@@ -22,7 +23,7 @@ public class MainController {
     }
     
     @RequestMapping("/users")
-    public @ResponseBody List<Member> getUserList() {
+    public @ResponseBody List<MemberInfo> getUserList() {
         return memberRepository.findAll();
     }
     
